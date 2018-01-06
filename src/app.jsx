@@ -1,10 +1,12 @@
 import React from 'react'
-import Cities from 'screens/cities'
-import Contacts from 'screens/contacts'
+import Header from './components/header'
+import Cities from './screens/cities'
+import Contacts from './screens/contacts'
 
 const App = () => {
   return (
     <div>
+      <Header />
       <Cities />
       <Contacts />
     </div>

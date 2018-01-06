@@ -1,10 +1,9 @@
 import { takeLatest } from 'redux-saga/effects'
-import * as h from 'sagas/helpers'
+import * as authorizations from './model/authorizations'
 
 export default function* () {
-  // TODO : remove it after the first intent,
-  // because we can follow multiple store into redux-dev-tools already
-  yield takeLatest('*', h.logger('MAIN'))
+  // from all screens
+  yield takeLatest('@@ui/MOUNTED', action => authorizations.load(action.screen))
 
   yield takeLatest(
     action => action.screen && action.screen.name === 'contacts',

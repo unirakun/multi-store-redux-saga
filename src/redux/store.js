@@ -13,7 +13,7 @@ const store = createStore(
     enhancer,
     applyMiddleware(middleware, sagaMiddleware),
     /* eslint-env browser */
-    window.devToolsExtension ? window.devToolsExtension({ name: 'main' }) : f => f,
+    window.devToolsExtension ? window.devToolsExtension({ name: 'root' }) : f => f,
   ),
 )
 

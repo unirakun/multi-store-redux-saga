@@ -1,12 +1,6 @@
 import React from 'react'
 import Cities from './gui/cities'
 
-const App = () => {
-  return (
-    <div>
-      <Cities />
-    </div>
-  )
-}
+const App = () => <Cities />
 
 export default App

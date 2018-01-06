@@ -2,6 +2,13 @@ import { connect } from 'react-redux'
 import { compose } from 'recompose'
 import loader from 'hoc-react-loader'
 import Component from './contacts'
+import { authorizations } from './redux'
+
+const mapStateToProps = (state) => {
+  return {
+    authorizations: authorizations.get()(state),
+  }
+}
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -10,6 +17,6 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default compose(
-  connect(undefined, mapDispatchToProps),
+  connect(mapStateToProps, mapDispatchToProps),
   loader(),
 )(Component)

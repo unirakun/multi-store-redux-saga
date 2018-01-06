@@ -20,6 +20,5 @@ const stubs = [
 ]
 
 export function* load() {
-  console.log('cities', yield select())
   yield put(cities.set(stubs))
 }

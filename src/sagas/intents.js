@@ -1,6 +1,25 @@
 import { takeLatest } from 'redux-saga/effects'
-import * as h from 'sagas/helpers'
+import * as authorizations from './model/authorizations'
+import * as header from './model/header'
 
 export default function* () {
-  yield takeLatest('*', h.logger('MAIN'))
+  // from all screens
+  yield takeLatest('@@ui/MOUNTED', action => authorizations.load(action.screen))
+
+  // set header
+  yield takeLatest('@@data/SET_HEADER', action => header.setText(action.payload))
+
+  // Example, filter on a specific screen
+  /* yield takeLatest(
+    action => action.screen && action.screen.name === 'contacts',
+    action => console.log('action from contacts catched to root', action),
+  ) */
+
+  // Example, from one screen to an other
+  /* yield takeLatest(
+    action => action.screen && action.screen.name === 'contacts',
+    (action) => {
+      action.stores.cities.dispatch({ type: 'ROOT_FROM_CONTACTS_TO_CITIES' })
+    },
+  ) */
 }

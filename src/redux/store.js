@@ -2,16 +2,26 @@ import { createStore, compose, applyMiddleware } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import { initializeCurrentLocation } from 'redux-little-router'
 import sagas from '../sagas'
-import { enhancer, middleware } from './router'
+import { enhancer, middleware as routerMiddleware } from './router'
 import reducers from './reducers'
 
 const sagaMiddleware = createSagaMiddleware()
+
+// TODO: make it a lib
+// this middleware filters root event so it doesn't come back
+// to root event listener (redux dispatch)
+// maybe this middleware should be kicked off after we come back to document.eventListener
+// instead of global variable
+const filterRootEvents = () => next => (action) => {
+  if (!/@@from-root\/.*/.test(action.type)) return next(action)
+  return undefined
+}
 
 const store = createStore(
   reducers,
   compose(
     enhancer,
-    applyMiddleware(middleware, sagaMiddleware),
+    applyMiddleware(filterRootEvents, routerMiddleware, sagaMiddleware),
     /* eslint-env browser */
     window.devToolsExtension ? window.devToolsExtension({ name: 'root' }) : f => f,
   ),
@@ -19,8 +29,8 @@ const store = createStore(
 
 sagaMiddleware.run(sagas)
 
-// connect root redux to the global one (TODO: make it a lib)
-document.dispatchEvent(new CustomEvent('@@alakarte/init-screen', { detail: { name: 'root', store } }))
+// root store to global scope
+window.rootStore = store
 
 const initialLocation = store.getState().router
 if (initialLocation) {

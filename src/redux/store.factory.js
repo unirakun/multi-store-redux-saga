@@ -1,22 +1,27 @@
 import { createStore, compose, applyMiddleware } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 
+// TODO: make it a lob
+// TODO: find a cleaner way to reach the root store
+// TODO: come back to a eventListener ?
+const dispatchToRoot = name => store => next => (action) => {
+  window.rootStore.dispatch({ ...action, screen: { name, store } })
+  return next(action)
+}
+
 export default reducers => sagas => (name) => {
   const sagaMiddleware = createSagaMiddleware()
 
   const store = createStore(
     reducers,
     compose(
-      applyMiddleware(sagaMiddleware),
+      applyMiddleware(dispatchToRoot(name), sagaMiddleware),
       /* eslint-env browser */
       window.devToolsExtension ? window.devToolsExtension({ name }) : f => f,
     ),
   )
 
   sagaMiddleware.run(sagas)
-
-  // connect child redux to the global one (TODO: make it a lib)
-  document.dispatchEvent(new CustomEvent('@@alakarte/init-screen', { detail: { name, store } }))
 
   return store
 }

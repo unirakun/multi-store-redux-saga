@@ -19,6 +19,9 @@ const store = createStore(
 
 sagaMiddleware.run(sagas)
 
+// connect root redux to the global one (TODO: make it a lib)
+document.dispatchEvent(new CustomEvent('@@alakarte/init-screen', { detail: { name: 'root', store } }))
+
 const initialLocation = store.getState().router
 if (initialLocation) {
   store.dispatch(initializeCurrentLocation(initialLocation))

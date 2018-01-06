@@ -15,5 +15,8 @@ export default reducers => sagas => (name) => {
 
   sagaMiddleware.run(sagas)
 
+  // connect child redux to the global one (TODO: make it a lib)
+  document.dispatchEvent(new CustomEvent('@@alakarte/init-screen', { detail: { name, store } }))
+
   return store
 }

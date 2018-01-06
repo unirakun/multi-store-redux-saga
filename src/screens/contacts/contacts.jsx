@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Contacts from './gui/contacts'
 
 const App = ({ authorizations }) => (
-  <div>
+  <div style={{ backgroundColor: 'blue', margin: '2em' }}>
     <h2>Component</h2>
     <Contacts />
     <h3>Prouf that habilitations are here</h3>

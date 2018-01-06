@@ -5,7 +5,7 @@ import Contacts from './screens/contacts'
 
 const App = () => {
   return (
-    <div>
+    <div style={{ backgroundColor: 'red' }}>
       <Header />
       <Cities />
       <Contacts />

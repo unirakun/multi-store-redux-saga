@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Cities from './gui/cities'
 
 const App = ({ authorizations }) => (
-  <div>
+  <div style={{ backgroundColor: 'violet', margin: '2em' }}>
     <h2>Component</h2>
     <Cities />
     <h3>Prouf that habilitations are here</h3>

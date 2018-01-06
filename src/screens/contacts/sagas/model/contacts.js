@@ -4,12 +4,12 @@ import { contacts } from '../../redux/reducers'
 const stubs = [
   {
     id: 1,
-    firtname: 'Fabien',
+    firstname: 'Fabien',
     lastname: 'JUIF',
   },
   {
     id: 2,
-    firtname: 'Guillaume',
+    firstname: 'Guillaume',
     lastname: 'CRESPEL',
   },
 ]

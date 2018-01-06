@@ -1,11 +1,19 @@
-import { createStore, compose } from 'redux'
+import { createStore, compose, applyMiddleware } from 'redux'
+import createSagaMiddleware from 'redux-saga'
 
-const store = reducers => name => createStore(
-  reducers,
-  compose(
-    /* eslint-env browser */
-    window.devToolsExtension ? window.devToolsExtension({ name }) : f => f,
-  ),
-)
+export default reducers => sagas => (name) => {
+  const sagaMiddleware = createSagaMiddleware()
 
-export default store
+  const store = createStore(
+    reducers,
+    compose(
+      applyMiddleware(sagaMiddleware),
+      /* eslint-env browser */
+      window.devToolsExtension ? window.devToolsExtension({ name }) : f => f,
+    ),
+  )
+
+  sagaMiddleware.run(sagas)
+
+  return store
+}

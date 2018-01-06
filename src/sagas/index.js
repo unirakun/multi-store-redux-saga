@@ -1,9 +1,9 @@
-import sagas from './combinedSagas'
+import sagas from './intents'
 
 export default function* () {
   function* errorHandlingSagas() {
     try {
-      yield sagas
+      yield sagas()
     } catch (ex) {
       // eslint-disable-next-line no-console
       console.error('saga exception', ex)

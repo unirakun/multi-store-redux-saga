@@ -6,7 +6,8 @@ const dispatchToRoot = name => store => next => (action) => {
   // dispatch event to the document
   // - the root redux can catch it
   if (!/@@from-root\/.*/.test(action.type)) {
-    document.dispatchEvent(new CustomEvent('@@alakarte/children-event', { detail: { name, store, action } }))
+    const event = new CustomEvent('@@alakarte/children-event', { detail: { name, store, action } })
+    document.dispatchEvent(event)
   }
 
   // dispatch event to the local redux

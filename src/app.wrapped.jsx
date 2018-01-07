@@ -1,6 +1,8 @@
 // - For webpack
 import 'isomorphic-fetch'
 import 'babel-polyfill'
+// TODO: lib, Peer dependecy ?
+import 'custom-event-polyfill'
 // - END / For webpack
 import React from 'react'
 import { Provider } from 'react-redux'

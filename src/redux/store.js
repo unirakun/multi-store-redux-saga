@@ -7,21 +7,11 @@ import reducers from './reducers'
 
 const sagaMiddleware = createSagaMiddleware()
 
-// TODO: make it a lib
-// this middleware filters root event so it doesn't come back
-// to root event listener (redux dispatch)
-// maybe this middleware should be kicked off after we come back to document.eventListener
-// instead of global variable
-const filterRootEvents = () => next => (action) => {
-  if (!/@@from-root\/.*/.test(action.type)) return next(action)
-  return undefined
-}
-
 const store = createStore(
   reducers,
   compose(
     enhancer,
-    applyMiddleware(filterRootEvents, routerMiddleware, sagaMiddleware),
+    applyMiddleware(routerMiddleware, sagaMiddleware),
     /* eslint-env browser */
     window.devToolsExtension ? window.devToolsExtension({ name: 'root' }) : f => f,
   ),

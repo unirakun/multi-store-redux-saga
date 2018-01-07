@@ -14,4 +14,12 @@ export default function* () {
     action => action.screen && action.screen.name === 'contacts',
     action => console.log('action from contacts catched to root', action),
   ) */
+
+  // Example, from one screen to an other
+  /* yield takeLatest(
+    action => action.screen && action.screen.name === 'contacts',
+    (action) => {
+      action.stores.cities.dispatch({ type: 'ROOT_FROM_CONTACTS_TO_CITIES' })
+    },
+  ) */
 }

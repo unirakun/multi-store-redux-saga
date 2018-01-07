@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { onlyUpdateForPropTypes } from 'recompose'
+import Common from 'components/common'
 
 const Header = ({
   text,
@@ -8,6 +9,7 @@ const Header = ({
 }) => {
   return (
     <div>
+      <Common />
       <button onClick={goToCities}>Cities</button>
       <button onClick={goToContacts}>Contacts</button>
       <div>{text}</div>

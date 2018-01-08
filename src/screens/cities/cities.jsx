@@ -1,22 +1,14 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import Authorizations from 'components/authorizations'
 import Cities from './gui/cities'
 
-const App = ({ authorizations }) => (
+const App = () => (
   <div style={{ backgroundColor: 'violet', margin: '2em' }}>
     <h2>Component</h2>
     <Cities />
-    <h3>Prouf that habilitations are here</h3>
-    {JSON.stringify(authorizations, null, 2)}
+
+    <Authorizations />
   </div>
 )
-
-App.propTypes = {
-  authorizations: PropTypes.object,
-}
-
-App.defaultProps = {
-  authorizations: { nothing: 'yet' },
-}
 
 export default App

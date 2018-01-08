@@ -1,14 +1,14 @@
-import { createStore, compose, applyMiddleware } from 'redux'
+import { createStore, compose, applyMiddleware, combineReducers } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import { initializeCurrentLocation } from 'redux-little-router'
 import sagas from '../sagas'
 import { enhancer, middleware as routerMiddleware } from './router'
-import reducers from './reducers'
+import * as reducers from './reducers'
 
 const sagaMiddleware = createSagaMiddleware()
 
 const store = createStore(
-  reducers,
+  combineReducers(reducers),
   compose(
     enhancer,
     applyMiddleware(routerMiddleware, sagaMiddleware),

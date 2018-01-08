@@ -1,4 +1,4 @@
-import { createStore, compose, applyMiddleware } from 'redux'
+import { createStore, compose, applyMiddleware, combineReducers } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 
 // TODO: make it a lib
@@ -18,7 +18,7 @@ export default reducers => sagas => (name) => {
   const sagaMiddleware = createSagaMiddleware()
 
   const store = createStore(
-    reducers,
+    combineReducers(reducers),
     compose(
       applyMiddleware(dispatchToRoot(name), sagaMiddleware),
       /* eslint-env browser */
